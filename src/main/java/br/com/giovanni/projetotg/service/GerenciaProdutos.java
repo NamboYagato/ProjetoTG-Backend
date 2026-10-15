@@ -86,7 +86,7 @@ public class GerenciaProdutos {
 
     public ProdutoDtoResponse buscarProduto(long id) {
         Produto p = produtoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Produto não encontrado!"));
-        return new ProdutoDtoResponse(p.getNome(), p.getValor(), p.getId(), new MercadoDtoSummary(p.getMercado().getNome(), p.getMercado().getId()), new UsuarioDtoSummary(p.getUsuario().getNome()), p.getTotalCorreto(), p.getTotalIncorreto());
+        return new ProdutoDtoResponse(p.getNome(), p.getValor(), p.getId(), new MercadoDtoSummary(p.getMercado().getNome(), p.getMercado().getId()), p.getUsuario() == null ? new UsuarioDtoSummary("Usuário deletado") : new UsuarioDtoSummary(p.getUsuario().getNome()), p.getTotalCorreto(), p.getTotalIncorreto());
     }
 
     public List<ProdutoDtoResponse> buscarProdutosPorMercado(long id) {
